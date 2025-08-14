@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Head from "next/head";
 
 const Register = () => {
@@ -32,12 +32,12 @@ const Register = () => {
 
     const data = new FormData();
     data.append("file", file);
-    data.append("upload_preset", "YOUR_UPLOAD_PRESET");
-    data.append("cloud_name", "YOUR_CLOUD_NAME");
+    data.append("upload_preset", "my-uploads");
+    data.append("cloud_name", "dw72swggv");
 
     try {
       const res = await fetch(
-        `https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload`,
+        `https://api.cloudinary.com/v1_1/dw72swggv/image/upload`,
         { method: "POST", body: data }
       );
       const cloudData = await res.json();
@@ -290,6 +290,8 @@ const Register = () => {
             </div>
           </div>
         </div>
+
+              <Toaster position="top-right" reverseOrder={false} />
       </div>
     </>
   );

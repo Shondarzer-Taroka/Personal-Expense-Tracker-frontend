@@ -1,11 +1,11 @@
 'use client';
-import Sidebar from '@/components/Dashboard/Sidebar';
-import Topbar from '@/components/Dashboard/Topbar';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaSpinner } from 'react-icons/fa';
 import { useAuthProvider } from '@/components/context/AuthContext';
+import Sidebar from '@/components/Dashboard/Sidebar/Sidebar';
+import Topbar from '@/components/Dashboard/Sidebar/Topbar';
 
 export default function DashboardLayout({ children }) {
   const { user, loading } = useAuthProvider();

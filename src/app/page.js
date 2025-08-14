@@ -37,7 +37,7 @@
 
 'use client'
 import { useAuthProvider } from "@/components/context/AuthContext";
-import DashboardCards from "@/components/Dashboard/DashboardCards";
+import DashboardCards from "@/components/Dashboard/Sidebar/DashboardCards/DashboardCards";
 import { redirect, useRouter } from "next/navigation";
 
 export default function DashboardPage() {
@@ -59,9 +59,7 @@ export default function DashboardPage() {
     return redirect('/login'); 
   }
 
-  if (user.role !== 'admin') {
-    router.push('/news/dashboard/myProfile')
-  }
+  
 
   return (
 

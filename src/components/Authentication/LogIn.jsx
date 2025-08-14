@@ -20,7 +20,7 @@ const LogIn = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-        credentials: "include", // important to send/receive cookies
+        credentials: "include", 
       });
 
       const data = await res.json();

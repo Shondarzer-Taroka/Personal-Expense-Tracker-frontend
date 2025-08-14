@@ -7,6 +7,7 @@ const Register = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    password: "",
     photo: ""
   });
   const [uploading, setUploading] = useState(false);
@@ -20,11 +21,8 @@ const Register = () => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Create preview
     const reader = new FileReader();
-    reader.onload = () => {
-      setPreview(reader.result);
-    };
+    reader.onload = () => setPreview(reader.result);
     reader.readAsDataURL(file);
 
     setUploading(true);
@@ -45,9 +43,7 @@ const Register = () => {
       if (cloudData.secure_url) {
         setForm({ ...form, photo: cloudData.secure_url });
         toast.success("Photo uploaded successfully!", { id: "upload" });
-      } else {
-        throw new Error("Upload failed");
-      }
+      } else throw new Error("Upload failed");
     } catch (err) {
       console.error(err);
       toast.error("Failed to upload photo", { id: "upload" });
@@ -56,10 +52,15 @@ const Register = () => {
     }
   };
 
+  const removePhoto = () => {
+    setForm({ ...form, photo: "" });
+    setPreview("");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.photo) {
-      return toast.error("Please fill all fields & upload photo");
+    if (!form.name || !form.email || !form.password) {
+      return toast.error("Please fill all required fields");
     }
 
     toast.loading("Registering user...", { id: "register" });
@@ -67,9 +68,7 @@ const Register = () => {
     try {
       const res = await fetch("http://localhost:5000/api/users/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
       });
 
@@ -77,7 +76,7 @@ const Register = () => {
 
       if (res.ok) {
         toast.success("Registration successful!", { id: "register" });
-        setForm({ name: "", email: "", photo: "" });
+        setForm({ name: "", email: "", password: "", photo: "" });
         setPreview("");
       } else {
         toast.error(data.message || "Registration failed", { id: "register" });
@@ -92,45 +91,18 @@ const Register = () => {
     <>
       <Head>
         <title>Register | Your App</title>
+        <meta name="description" content="Create a new account to get started" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center px-4 relative overflow-hidden">
         {/* Animated SVG Background */}
         <div className="absolute inset-0 overflow-hidden z-0">
-          <svg
-            className="absolute w-full h-full opacity-10"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 320"
-          >
-            <path
-              fill="#3b82f6"
-              fillOpacity="0.5"
-              d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            >
-              <animateTransform
-                attributeName="transform"
-                attributeType="XML"
-                type="translate"
-                from="0 0"
-                to="0 -100"
-                dur="15s"
-                repeatCount="indefinite"
-              />
+          <svg className="absolute w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#3b82f6" fillOpacity="0.5" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+              <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="0 -100" dur="15s" repeatCount="indefinite"/>
             </path>
-            <path
-              fill="#6366f1"
-              fillOpacity="0.3"
-              d="M0,128L48,154.7C96,181,192,235,288,234.7C384,235,480,181,576,181.3C672,181,768,235,864,250.7C960,267,1056,245,1152,213.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            >
-              <animateTransform
-                attributeName="transform"
-                attributeType="XML"
-                type="translate"
-                from="0 0"
-                to="0 -150"
-                dur="20s"
-                repeatCount="indefinite"
-              />
+            <path fill="#6366f1" fillOpacity="0.3" d="M0,128L48,154.7C96,181,192,235,288,234.7C384,235,480,181,576,181.3C672,181,768,235,864,250.7C960,267,1056,245,1152,213.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+              <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="0 -150" dur="20s" repeatCount="indefinite"/>
             </path>
           </svg>
         </div>
@@ -146,108 +118,75 @@ const Register = () => {
               {/* Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Full Name
+                  Full Name <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                  placeholder="John Doe"
-                />
+                <input type="text" name="name" value={form.name} onChange={handleChange} required className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" placeholder="John Doe"/>
               </div>
 
               {/* Email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address
+                  Email Address <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                  placeholder="your@email.com"
-                />
+                <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" placeholder="your@email.com"/>
+              </div>
+
+              {/* Password */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Password <span className="text-red-500">*</span>
+                </label>
+                <input type="password" name="password" value={form.password} onChange={handleChange} required className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" placeholder="Enter password"/>
               </div>
 
               {/* Photo Upload */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Profile Photo
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Profile Photo (Optional)</label>
                 <div className="flex items-center space-x-4">
                   <div className="relative">
                     {(preview || form.photo) && (
-                      <img
-                        src={preview || form.photo}
-                        alt="Preview"
-                        className="h-16 w-16 rounded-full object-cover border-2 border-white shadow"
-                      />
-                    )}
-                    {!preview && !form.photo && (
-                      <div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center">
-                        <svg
-                          className="h-8 w-8 text-gray-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          />
-                        </svg>
+                      <div className="relative group">
+                        <img src={preview || form.photo} alt="Preview" className="h-16 w-16 rounded-full object-cover border-2 border-white shadow"/>
+                        <button type="button" onClick={removePhoto} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity shadow-md hover:bg-red-600">
+                          X
+                        </button>
                       </div>
                     )}
+                    {!preview && !form.photo && (
+                      <div className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-dashed border-gray-300">+</div>
+                    )}
                   </div>
-                  <label className="flex-1">
-                    <div className="px-4 py-2 bg-white rounded-lg border border-gray-300 hover:bg-gray-50 cursor-pointer transition-colors">
-                      <span className="text-sm font-medium text-gray-700">
-                        {preview || form.photo ? "Change Photo" : "Upload Photo"}
-                      </span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handlePhotoChange}
-                        className="hidden"
-                      />
-                    </div>
-                  </label>
+                  <div className="flex-1 space-y-2">
+                    <label className="block">
+                      <div className="px-4 py-2 bg-white rounded-lg border border-gray-300 hover:bg-gray-50 cursor-pointer transition-colors text-center">
+                        <span className="text-sm font-medium text-gray-700">{preview || form.photo ? "Change Photo" : "Upload Photo"}</span>
+                        <input type="file" accept="image/*" onChange={handlePhotoChange} className="hidden"/>
+                      </div>
+                    </label>
+                    <p className="text-xs text-gray-500">JPEG, PNG (Max 2MB)</p>
+                  </div>
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={uploading}
-                className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all ${
-                  uploading
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md"
-                }`}
-              >
+              <button type="submit" disabled={uploading} className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all flex items-center justify-center ${uploading ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-lg"}`}>
                 {uploading ? "Processing..." : "Register Now"}
               </button>
             </form>
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
-                Already have an account?{" "}
-                <a href="#" className="text-blue-600 hover:text-blue-800 font-medium">
-                  Sign in
-                </a>
+                Already have an account? <a href="#" className="text-blue-600 hover:text-blue-800 font-medium transition-colors">Sign in</a>
               </p>
             </div>
           </div>
         </div>
 
-        <Toaster position="top-right" reverseOrder={false} />
+        <Toaster position="top-center" toastOptions={{
+          duration: 4000,
+          style: { background: '#363636', color: '#fff' },
+          success: { duration: 3000, iconTheme: { primary: '#10B981', secondary: 'white' } },
+          error: { iconTheme: { primary: '#EF4444', secondary: 'white' } }
+        }}/>
       </div>
     </>
   );

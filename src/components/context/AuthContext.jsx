@@ -12,9 +12,9 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/users/me", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/me`, {
         method: "GET",
-        credentials: "include", // important: send cookie
+        credentials: "include", 
       });
 
       if (res.ok) {

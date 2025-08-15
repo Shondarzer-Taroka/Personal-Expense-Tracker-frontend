@@ -34,7 +34,7 @@ export default function Topbar({ toggleSidebar }) {
             ? 'স্বাগতম ইউজার!'
             : user?.role === 'admin'
             ? 'স্বাগতম অ্যাডমিন!'
-            : 'ড্যাশবোর্ড'}
+            : 'Dashboard'}
         </h1>
       </div>
 

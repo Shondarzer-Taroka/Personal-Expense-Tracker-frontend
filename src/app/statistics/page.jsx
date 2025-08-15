@@ -1,9 +1,11 @@
 // statistics
 
 'use client';
-import { useExpenses } from '@/context/ExpenseContext';
-import ExpensePieChart from '@/components/charts/ExpensePieChart';
-import ExpenseStats from '@/components/expenses/ExpenseStats';
+
+import ExpensePieChart from "@/components/charts/ExpensePieChart";
+import { useExpenses } from "../context/ExpenseContext";
+import ExpenseStats from "../expenses/ExpenseStats";
+
 
 export default function StatisticsPage() {
   const { expenses, loading } = useExpenses();

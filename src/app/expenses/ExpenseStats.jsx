@@ -1,5 +1,6 @@
 'use client';
-import { useExpenses } from '@/context/ExpenseContext';
+
+import { useExpenses } from "../context/ExpenseContext";
 
 export default function ExpenseStats() {
   const { expenses } = useExpenses();

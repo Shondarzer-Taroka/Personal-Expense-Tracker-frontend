@@ -55,7 +55,7 @@ export default function Sidebar({ isMobile, toggleSidebarLayout }) {
 
   if (!user) return null;
 
-  const filteredLinks = allLinks.filter(link => link.roles.includes(user.role));
+//   const filteredLinks = allLinks.filter(link => link.roles.includes(user.role));
 
   return (
     <aside className={clsx(
@@ -110,7 +110,7 @@ export default function Sidebar({ isMobile, toggleSidebarLayout }) {
           'space-y-2',
           isCollapsed ? 'px-2 py-4' : 'p-2'
         )}>
-          {filteredLinks.map((link) => (
+          {allLinks.map((link) => (
             <li key={link.label}>
               <Link
                 href={link.href}
@@ -141,7 +141,7 @@ export default function Sidebar({ isMobile, toggleSidebarLayout }) {
         {!isCollapsed && (
           <div className="text-sm">
             <p className="font-medium">{user.name}</p>
-            <p className="text-indigo-300">{user.role}</p>
+            {/* <p className="text-indigo-300">{user.role}</p> */}
           </div>
         )}
         <div className="w-8 h-8 rounded-full bg-indigo-700 flex items-center justify-center">

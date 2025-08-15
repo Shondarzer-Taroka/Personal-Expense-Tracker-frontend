@@ -4,13 +4,15 @@
 import Image from 'next/image';
 import { FiMenu, FiUser } from 'react-icons/fi';
 import clsx from 'clsx';
-
-import NotificationBell from '../NotificationBell/NotificationBell';
-import AdminNotificationBell from '../NotificationBell/AdminNotificationBell';
 import { useAuthProvider } from '@/components/context/AuthContext';
+
 
 export default function Topbar({ toggleSidebar }) {
   const { user, loading } = useAuthProvider();
+
+  if (loading) {
+    return 'loading'
+  }
 
   return (
     <div
@@ -41,11 +43,6 @@ export default function Topbar({ toggleSidebar }) {
           <div className="animate-pulse bg-gray-200 rounded-full w-32 h-8"></div>
         ) : (
           <>
-            {user?.role === 'admin' ? (
-              <AdminNotificationBell />
-            ) : (
-              <NotificationBell />
-            )}
 
             <button
               className={clsx(

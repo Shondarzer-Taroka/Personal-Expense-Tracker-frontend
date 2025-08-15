@@ -7,6 +7,7 @@ import Sidebar from '@/components/Dashboard/Sidebar/Sidebar';
 import Topbar from '@/components/Dashboard/Sidebar/Topbar';
 import { AuthProvider, useAuthProvider } from '@/components/context/AuthContext';
 import './globals.css';
+import { ExpenseProvider } from './context/ExpenseContext';
 
 function DashboardLayout({ children }) {
   const { user, loading } = useAuthProvider();
@@ -63,13 +64,14 @@ function DashboardLayout({ children }) {
 
 
 
-// Root layout wraps everything with AuthProvider
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className='font-poppins'>
         <AuthProvider>
-          <DashboardLayout>{children}</DashboardLayout>
+          <ExpenseProvider>
+            <DashboardLayout>{children}</DashboardLayout>
+          </ExpenseProvider>
         </AuthProvider>
       </body>
     </html>

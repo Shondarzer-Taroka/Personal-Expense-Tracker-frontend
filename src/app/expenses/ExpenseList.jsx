@@ -1,7 +1,7 @@
 'use client';
 
+import CategoryBadge from '@/components/Expenses/CategoryBadge/CategoryBadge';
 import { useExpenses } from '../context/ExpenseContext';
-import CategoryBadge from '../components/CategoryBadge';
 import { format } from 'date-fns';
 
 const ExpenseList = () => {

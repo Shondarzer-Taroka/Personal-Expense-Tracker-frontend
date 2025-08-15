@@ -6,3 +6,8 @@
   --font-poppins: 'Poppins', sans-serif;
 
 }
+
+
+.container {
+  @apply max-w-7xl mx-auto;
+}

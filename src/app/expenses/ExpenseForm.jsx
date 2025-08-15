@@ -1,9 +1,8 @@
 'use client';
 
+import CustomDatePicker from '@/components/Expenses/DatePicker.jsx/DatePicker';
 import { useState, useEffect } from 'react';
 import { useExpenses } from '../context/ExpenseContext';
-import DatePicker from '../components/DatePicker';
-import CategoryBadge from '../components/CategoryBadge';
 
 const categories = [
   'Food',
@@ -198,7 +197,7 @@ const ExpenseForm = () => {
           <label className="block text-gray-700 mb-2" htmlFor="date">
             Date
           </label>
-          <DatePicker
+          <CustomDatePicker
             selected={new Date(formData.date)}
             onChange={handleDateChange}
             className={`w-full p-2 border rounded ${

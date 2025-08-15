@@ -8,7 +8,6 @@ import Topbar from '@/components/Dashboard/Sidebar/Topbar';
 import { AuthProvider, useAuthProvider } from '@/components/context/AuthContext';
 import './globals.css';
 
-// This renders the dashboard shell if user is logged in and path matches
 function DashboardLayout({ children }) {
   const { user, loading } = useAuthProvider();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -36,7 +35,7 @@ function DashboardLayout({ children }) {
     );
   }
 
-  // Only show dashboard layout on dashboard routes and if logged in
+
   if (pathname.startsWith('/') && user?.email) {
     return (
       <div className="flex min-h-screen bg-gray-50">
@@ -68,7 +67,7 @@ function DashboardLayout({ children }) {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className='font-poppins'>
         <AuthProvider>
           <DashboardLayout>{children}</DashboardLayout>
         </AuthProvider>

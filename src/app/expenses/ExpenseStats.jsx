@@ -1,8 +1,7 @@
 'use client';
+import { useExpenses } from '@/context/ExpenseContext';
 
-import { useExpenses } from '../context/ExpenseContext';
-
-const ExpenseStats = () => {
+export default function ExpenseStats() {
   const { expenses } = useExpenses();
 
   const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
@@ -16,31 +15,26 @@ const ExpenseStats = () => {
   }, {});
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-      <div className="bg-blue-100 p-4 rounded-lg shadow">
-        <h3 className="text-lg font-semibold text-blue-800 mb-2">
-          Total Expenses
-        </h3>
-        <p className="text-2xl font-bold text-blue-600">
-          ${total.toFixed(2)}
-        </p>
-      </div>
-
-      <div className="bg-green-100 p-4 rounded-lg shadow">
-        <h3 className="text-lg font-semibold text-green-800 mb-2">
-          By Category
-        </h3>
-        <ul className="space-y-1">
-          {Object.entries(categoryTotals).map(([category, amount]) => (
-            <li key={category} className="flex justify-between">
-              <span className="font-medium">{category}:</span>
-              <span>${amount.toFixed(2)}</span>
-            </li>
-          ))}
-        </ul>
+    <div>
+      <h2 className="text-lg font-semibold mb-4">Summary</h2>
+      <div className="space-y-2">
+        <div className="flex justify-between">
+          <span className="font-medium">Total Expenses:</span>
+          <span className="font-bold">${total.toFixed(2)}</span>
+        </div>
+        
+        <div className="mt-4">
+          <h3 className="font-medium mb-2">By Category:</h3>
+          <ul className="space-y-1">
+            {Object.entries(categoryTotals).map(([category, amount]) => (
+              <li key={category} className="flex justify-between">
+                <span>{category}:</span>
+                <span>${amount.toFixed(2)} (${((amount/total)*100).toFixed(1)}%)</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
-};
-
-export default ExpenseStats;
+}

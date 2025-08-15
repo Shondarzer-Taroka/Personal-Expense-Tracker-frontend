@@ -18,9 +18,9 @@ import { useAuthProvider } from '@/components/context/AuthContext';
 
 const allLinks = [
   { label: 'Home', icon: <FiHome size={20} />, href: '/' },
-  { label: 'Expenses Overview', icon: <UserRoundPen size={20} />, href: '/news/dashboard/myProfile'},
-  { label: 'Add expenses', icon: <FiEdit size={20} />, href: '/news/dashboard/createNews' },
-  { label: 'All expenses', icon: <FiUsers size={20} />, href: '/news/dashboard/allUsers'},
+  { label: 'Expenses Overview', icon: <UserRoundPen size={20} />, href: '/statistics'},
+  { label: 'Add expenses', icon: <FiEdit size={20} />, href: '/createExpenses' },
+  { label: 'All expenses', icon: <FiUsers size={20} />, href: '/expenses'},
 ];
 
 export default function Sidebar({ isMobile, toggleSidebarLayout }) {
@@ -41,7 +41,7 @@ export default function Sidebar({ isMobile, toggleSidebarLayout }) {
         isCollapsed ? 'w-20' : 'w-64'
       )}>
         <div className="flex justify-center items-center h-full">
-          <div className="animate-pulse">লোড হচ্ছে...</div>
+          <div className="animate-pulse">Loading...</div>
         </div>
       </div>
     );
@@ -66,7 +66,7 @@ export default function Sidebar({ isMobile, toggleSidebarLayout }) {
       )}>
         {!isCollapsed && (
           <h2 className="text-xl font-bold whitespace-nowrap">
-            <Link href={'/news/dashboard'}> ড্যাশবোর্ড </Link>
+            <Link href={'/news/dashboard'}> Dashboard </Link>
           </h2>
         )}
 

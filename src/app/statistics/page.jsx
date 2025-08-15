@@ -3,8 +3,9 @@
 'use client';
 
 import ExpensePieChart from "@/components/charts/ExpensePieChart";
-import { useExpenses } from "../context/ExpenseContext";
+
 import ExpenseStats from "../expenses/ExpenseStats";
+import { useExpenses } from "../context/ExpenseContext";
 
 
 export default function StatisticsPage() {

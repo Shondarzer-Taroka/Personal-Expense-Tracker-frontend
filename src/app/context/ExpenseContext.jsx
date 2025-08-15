@@ -1,7 +1,5 @@
 'use client';
-
 import { createContext, useContext, useState, useEffect } from 'react';
-
 const ExpenseContext = createContext();
 
 export const ExpenseProvider = ({ children }) => {

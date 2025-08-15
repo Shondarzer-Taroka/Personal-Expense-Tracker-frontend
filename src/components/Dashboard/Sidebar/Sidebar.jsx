@@ -17,16 +17,10 @@ import { MdClose } from 'react-icons/md';
 import { useAuthProvider } from '@/components/context/AuthContext';
 
 const allLinks = [
-  { label: 'মূলপাতা', icon: <FiHome size={20} />, href: '/' },
-  { label: 'আমার প্রোফাইল', icon: <UserRoundPen size={20} />, href: '/news/dashboard/myProfile'},
-  { label: 'লেখা যুক্ত করুন', icon: <FiEdit size={20} />, href: '/news/dashboard/createNews' },
-  { label: 'ইউজার', icon: <FiUsers size={20} />, href: '/news/dashboard/allUsers'},
-  { label: 'অনলাইন ভোট যুক্ত করুন', icon: <FaSquarePollVertical size={20} />, href: '/news/dashboard/createPoll'},
-  { label: 'ই-পেপার', icon: <FiPaperclip size={20} />, href: '/news/dashboard/epapers/list'},
-  { label: 'খবর', icon: <Newspaper size={20} />, href: '/news/dashboard/allNews'},
-  { label: 'মতামত যুক্ত করুন', icon: <ClipboardPen size={20} />, href: '/news/dashboard/createOpinion' },
-  { label: 'ইউজার মতামত সমূহ', icon: <BookOpenCheck size={20} />, href: '/news/dashboard/opinions'},
-  { label: 'আমার মতামত সমূহ', icon: <BookOpenText size={20} />, href: '/news/dashboard/myOpinions'},
+  { label: 'Home', icon: <FiHome size={20} />, href: '/' },
+  { label: 'Expenses Overview', icon: <UserRoundPen size={20} />, href: '/news/dashboard/myProfile'},
+  { label: 'Add expenses', icon: <FiEdit size={20} />, href: '/news/dashboard/createNews' },
+  { label: 'All expenses', icon: <FiUsers size={20} />, href: '/news/dashboard/allUsers'},
 ];
 
 export default function Sidebar({ isMobile, toggleSidebarLayout }) {

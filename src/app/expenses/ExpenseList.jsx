@@ -177,7 +177,7 @@ const ExpenseList = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="glass-container rounded-xl shadow-sm overflow-hidden border border-white/20"
+        className="glass-container custom-scrollbar rounded-xl shadow-sm overflow-hidden border border-white/20"
       >
         {/* Filter and Pagination Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-white/10 border-b">
@@ -208,7 +208,7 @@ const ExpenseList = () => {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute z-10 mt-2 w-full sm:w-48 glass-container rounded-lg shadow-lg border border-white/20 backdrop-blur-xl">
+                  <Menu.Items className="absolute z-10 mt-2 w-full sm:w-48  rounded-lg shadow-lg border bg-gradient-to-b from-[#320c49] to-[#5f0c6af6] border-white/20 backdrop-blur-xl">
                     <div className="py-1 max-h-60 overflow-y-auto">
                       {categories.map((category) => (
                         <Menu.Item key={category}>

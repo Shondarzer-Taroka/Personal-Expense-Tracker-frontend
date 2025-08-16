@@ -19,7 +19,7 @@ import { MdClose } from 'react-icons/md';
 import { useAuthProvider } from '../../../../src/components/context/AuthContext';
 
 const allLinks = [
-  { label: 'Over View', icon: <FiHome size={20} />, href: '/' },
+  { label: 'Expenses Overview', icon: <FiHome size={20} />, href: '/' },
   { label: 'Add expenses', icon: <FiEdit size={20} />, href: '/createExpenses' },
   { label: 'All expenses', icon: <Wallet size={20} />, href: '/expenses'},
 ];

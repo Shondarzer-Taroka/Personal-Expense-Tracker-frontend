@@ -29,7 +29,7 @@ const LogIn = () => {
 
       if (res.ok) {
         toast.success("Login successful!", { id: "login" });
-        router.push('/');
+        window.location.href = "/";
         setForm({ email: "", password: "" });
       } else {
         toast.error(data.message || "Login failed", { id: "login" });

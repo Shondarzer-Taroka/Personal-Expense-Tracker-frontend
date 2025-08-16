@@ -16,7 +16,7 @@ export default function ExpenseStats() {
   }, {});
 
   return (
-    <div className="glass-container p-6 rounded-xl shadow-lg border border-white/20 backdrop-blur-lg">
+    <div className="glass-container p-2 md:p-6 rounded-xl shadow-lg border border-white/20 backdrop-blur-lg">
       <h2 className="text-xl font-semibold mb-4 text-white">Expense Summary</h2>
       <div className="space-y-4">
         <div className="glass-container-inner p-4 rounded-lg border border-white/10">

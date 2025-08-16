@@ -16,7 +16,7 @@ export default function ExpensePieChart({ expenses }) {
   }, []);
 
   return (
-    <div className="relative w-full h-full p-4">
+    <div className="relative w-full h-[400px] lg:h-full p-4">
       <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg"></div>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>

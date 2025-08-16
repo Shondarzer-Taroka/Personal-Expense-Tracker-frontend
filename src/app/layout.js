@@ -1,3 +1,4 @@
+
 'use client';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
@@ -88,11 +89,11 @@ function DashboardLayout({ children }) {
             className={clsx(
               'flex-1 flex flex-col',
               'transition-all duration-300 ease-in-out',
-              'mr-1 lg:ml-0 overflow-x-hidden'
+              ' lg:ml-0 overflow-x-hidden'
             )}
           >
             <Topbar toggleSidebar={toggleSidebar} />
-            <main className="flex-1 p-4 md:p-6  backdrop-blur-sm rounded-tl-lg shadow-sm md:w-full">
+            <main className="flex-1 p-2 md:p-6  backdrop-blur-sm rounded-tl-lg shadow-sm md:w-full">
               {children}
             </main>
           </div>

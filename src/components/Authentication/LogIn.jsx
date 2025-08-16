@@ -10,6 +10,42 @@ const LogIn = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const handleDemoLogin = async () => {
+    setForm({
+      email: "shishir@sakib.com",
+      password: "123asD"
+    });
+    
+    setLoading(true);
+    toast.loading("Logging in with demo account...", { id: "login" });
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "demo@expensetracker.com",
+          password: "demopassword123"
+        }),
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success("Demo login successful!", { id: "login" });
+        window.location.href = "/";
+      } else {
+        toast.error(data.message || "Demo login failed", { id: "login" });
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Server error during demo login", { id: "login" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.email || !form.password) return toast.error("Please fill all fields");
@@ -43,11 +79,11 @@ const LogIn = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden z-0">
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-br "></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-purple-900/20"></div>
       </div>
 
       <div className="w-full max-w-md z-10">
@@ -64,7 +100,7 @@ const LogIn = () => {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg glass-container border bg-white/10  border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all"
+                className="w-full px-4 py-3 rounded-lg glass-container border bg-white/10 border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all"
                 required
                 placeholder="your@email.com"
               />
@@ -86,10 +122,10 @@ const LogIn = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 cursor-pointer transition-colors font-medium  ${
+              className={`w-full py-3 rounded-lg border border-white/20 text-white hover:bg-white/20 cursor-pointer transition-colors font-medium ${
                 loading 
                   ? "bg-white/20 cursor-not-allowed flex items-center justify-center"
-                  : "bg-gradient-to-r hover:bg-white/20 shadow-md hover:shadow-lg"
+                  : "bg-gradient-to-r from-indigo-500/80 to-purple-500/80 hover:bg-white/20 shadow-md hover:shadow-lg"
               }`}
             >
               {loading ? (
@@ -101,6 +137,24 @@ const LogIn = () => {
                   Logging in...
                 </>
               ) : "Login"}
+            </button>
+
+            <div className="relative flex items-center py-4">
+              <div className="flex-grow border-t border-white/20"></div>
+              <span className="flex-shrink mx-4 text-white/50 text-sm">OR</span>
+              <div className="flex-grow border-t border-white/20"></div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleDemoLogin}
+              disabled={loading}
+              className="w-full py-3 rounded-lg bg-amber-500/10 border border-amber-400/20 text-amber-100 hover:bg-amber-500/20 transition-colors font-medium shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+              </svg>
+              Try Demo Account
             </button>
           </form>
           
@@ -127,7 +181,7 @@ const LogIn = () => {
       />
 
       <style jsx global>{`
-       .glass-container {
+        .glass-container {
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);

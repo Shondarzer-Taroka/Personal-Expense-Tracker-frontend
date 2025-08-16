@@ -10,6 +10,8 @@ import { toast } from 'react-hot-toast';
 
 export default function Topbar({ toggleSidebar }) {
   const { user, loading } = useAuthProvider();
+  console.log(user,'user');
+  
   const handleLogout = async () => {
     try {
        const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/logout`,{

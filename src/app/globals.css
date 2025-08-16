@@ -11,3 +11,7 @@
 .container {
   @apply max-w-7xl mx-auto;
 }
+
+.react-datepicker-wrapper{
+width: 100%;
+}

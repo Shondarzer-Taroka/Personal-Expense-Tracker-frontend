@@ -1,12 +1,12 @@
 import React from 'react';
 import ExpenseForm from '../expenses/ExpenseForm';
 
-const page = () => {
-    return (
-        <div>
-            <ExpenseForm/>
-        </div>
-    );
+const Page = () => {
+  return (
+    <div className="grid h-screen place-items-center">
+      <ExpenseForm />
+    </div>
+  );
 };
 
-export default page;
+export default Page;
